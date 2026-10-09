@@ -102,6 +102,18 @@ export class ArenaScene extends Phaser.Scene {
       (ARENA_RADIUS + 300) * 2,
       (ARENA_RADIUS + 300) * 2
     );
+    // ESC pause trigger
+    this.input.keyboard?.on("keydown-ESC", () => {
+      if (!this.isMatchOver && !this.scene.isPaused("arena")) {
+        this.pauseGame();
+      }
+    });
+  }
+
+  public pauseGame(): void {
+    this.scene.pause();
+    this.scene.launch("pause", { shipId: this.playerShipId });
+    this.scene.bringToTop("pause");
   }
 
   private createStarfield(): void {
@@ -131,13 +143,6 @@ export class ArenaScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
-    // Check pause request
-    if (this.inputController.isPauseJustPressed()) {
-      this.scene.pause();
-      this.scene.launch("pause", { shipId: this.playerShipId });
-      return;
-    }
-
     const dt = delta / 1000;
 
     // 1. Player Step

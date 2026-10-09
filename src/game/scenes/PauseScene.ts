@@ -22,6 +22,7 @@ export class PauseScene extends Phaser.Scene {
     const overlay = this.add.graphics();
     overlay.fillStyle(0x02050a, 0.75);
     overlay.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+    overlay.setDepth(1000);
 
     // Pause Dialog Box
     const box = this.add.graphics();
@@ -29,13 +30,14 @@ export class PauseScene extends Phaser.Scene {
     box.lineStyle(2, 0x00f0ff, 0.8);
     box.fillRoundedRect(GAME_WIDTH / 2 - 200, GAME_HEIGHT / 2 - 160, 400, 320, 12);
     box.strokeRoundedRect(GAME_WIDTH / 2 - 200, GAME_HEIGHT / 2 - 160, 400, 320, 12);
+    box.setDepth(1001);
 
     this.add.text(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 110, "ПАУЗА", {
       fontFamily: "Orbitron, sans-serif",
       fontSize: "32px",
       color: "#00f0ff",
       fontStyle: "bold",
-    }).setOrigin(0.5);
+    }).setOrigin(0.5).setDepth(1002);
 
     // Resume Button
     this.createButton(GAME_WIDTH / 2, GAME_HEIGHT / 2 - 40, "ПРОДОЛЖИТЬ (ESC)", () => {
@@ -60,11 +62,13 @@ export class PauseScene extends Phaser.Scene {
       this.scene.start("menu");
     });
 
-    // ESC to resume
-    this.input.keyboard?.on("keydown-ESC", () => {
-      this.soundSystem.playUiClick();
-      this.scene.stop();
-      this.scene.resume("arena");
+    // ESC to resume (debounced to avoid triggering on the opening keydown)
+    this.time.delayedCall(250, () => {
+      this.input.keyboard?.once("keydown-ESC", () => {
+        this.soundSystem.playUiClick();
+        this.scene.stop();
+        this.scene.resume("arena");
+      });
     });
   }
 
@@ -73,6 +77,7 @@ export class PauseScene extends Phaser.Scene {
     const height = 44;
 
     const container = this.add.container(x, y);
+    container.setDepth(1002);
     const bg = this.add.graphics();
 
     bg.fillStyle(0x00d4ff, 0.15);
