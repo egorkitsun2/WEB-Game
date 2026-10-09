@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import type { CombatResult } from "../types";
 import { SoundSystem } from "../systems/SoundSystem";
-import { GAME_HEIGHT, GAME_WIDTH } from "../config";
+import { GAME_HEIGHT, GAME_WIDTH } from "../data/constants";
 
 export class ResultScene extends Phaser.Scene {
   private result!: CombatResult;

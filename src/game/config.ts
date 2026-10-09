@@ -5,8 +5,9 @@ import { ArenaScene } from "./scenes/ArenaScene";
 import { PauseScene } from "./scenes/PauseScene";
 import { ResultScene } from "./scenes/ResultScene";
 
-export const GAME_WIDTH = 1280;
-export const GAME_HEIGHT = 720;
+import { GAME_WIDTH, GAME_HEIGHT } from "./data/constants";
+
+export { GAME_WIDTH, GAME_HEIGHT };
 
 export const gameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,

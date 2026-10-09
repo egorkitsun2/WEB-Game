@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { SoundSystem } from "../systems/SoundSystem";
-import { GAME_HEIGHT, GAME_WIDTH } from "../config";
+import { GAME_HEIGHT, GAME_WIDTH } from "../data/constants";
 import type { ShipId } from "../types";
 
 export class PauseScene extends Phaser.Scene {
