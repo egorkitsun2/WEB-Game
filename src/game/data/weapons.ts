@@ -1,0 +1,40 @@
+import type { WeaponDef, WeaponId } from "../types";
+
+export const WEAPONS: Record<WeaponId, WeaponDef> = {
+  laser: {
+    id: "laser",
+    label: "Лазер",
+    damage: 8,
+    cooldownMs: 200,
+    speed: 900,
+    lifetimeMs: 900,
+    radius: 4,
+    spreadDeg: 1,
+    homing: 0,
+    color: 0x00ffcc,
+  },
+  plasma: {
+    id: "plasma",
+    label: "Плазма",
+    damage: 22,
+    cooldownMs: 700,
+    speed: 420,
+    lifetimeMs: 1400,
+    radius: 9,
+    spreadDeg: 6,
+    homing: 0,
+    color: 0xff22aa,
+  },
+  missile: {
+    id: "missile",
+    label: "Ракета",
+    damage: 40,
+    cooldownMs: 2500,
+    speed: 320,
+    lifetimeMs: 2200,
+    radius: 7,
+    spreadDeg: 0,
+    homing: 0.04,
+    color: 0xffaa00,
+  },
+};
